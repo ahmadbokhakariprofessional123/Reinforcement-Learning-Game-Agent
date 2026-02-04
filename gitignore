@@ -1,0 +1,56 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+pip-wheel-metadata/
+.eggs/
+*.egg-info/
+dist/
+build/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- IDEs / Editors ---
+.vscode/
+.idea/
+
+# --- Logs / runs ---
+logs/
+log/
+runs/
+run/
+tensorboard/
+tb/
+*.log
+
+# --- RL artifacts / models ---
+*.zip
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# --- Numpy / data ---
+*.npy
+*.npz
+
+# --- Test cache ---
+.pytest_cache/
+.mypy_cache/
+
+# --- Coverage ---
+.coverage
+htmlcov/
+
+# --- Temporary files ---
+*.tmp
+*.temp
