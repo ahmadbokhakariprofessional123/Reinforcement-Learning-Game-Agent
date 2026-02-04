@@ -1,0 +1,84 @@
+
+# Evaluation
+
+## Overview
+This folder contains scripts used to evaluate the behaviour and performance of the Reinforcement Learning (RL) agent within the custom game environment.
+
+Evaluation focuses on analysing how the trained agent interacts with the environment, how rewards are accumulated, and whether learned policies align with expected gameplay behaviour.
+
+Unlike validation, which checks correctness of logic, **evaluation measures how well the agent performs** under the defined rules and reward structure.
+
+---
+
+## Purpose of Evaluation
+The evaluation process aims to:
+- Assess how effectively the RL agent plays the game
+- Observe agent decision-making patterns
+- Analyse reward accumulation and episode outcomes
+- Compare agent behaviour across different evaluation runs
+- Identify weaknesses in reward shaping or environment design
+
+---
+
+## Files in This Folder
+
+### `evaluation.py`
+Core evaluation script used to run the trained agent in the environment and observe its performance over multiple episodes.
+
+### `evaluation_more.py`
+Extended evaluation script that explores additional scenarios and longer runs to better understand agent behaviour over time.
+
+### `evaluation_final.py`
+Final consolidated evaluation script used to summarise agent performance and behaviour after training.
+
+### `evaluate_board_innit.py`
+Evaluates whether the game board is correctly initialised before episodes begin, ensuring consistent starting conditions for evaluation.
+
+### `origins_env.py`
+The custom OpenAI Gym-compatible environment used during evaluation.  
+Defines:
+- State space
+- Action space
+- Observation space
+- Reward mechanics
+- Game rules
+
+---
+
+## Evaluation Methodology
+1. Load the trained RL agent
+2. Initialise the custom game environment
+3. Run multiple evaluation episodes
+4. Track agent actions, rewards, and game outcomes
+5. Analyse whether behaviour aligns with expected strategies
+
+Evaluation was performed using fixed environment logic to ensure consistent results across runs.
+
+---
+
+## Key Evaluation Criteria
+- **Reward Trends:** Whether cumulative rewards improve over time
+- **Action Validity:** Whether the agent selects valid and logical moves
+- **Game Progression:** Whether the agent progresses towards winning conditions
+- **Stability:** Consistency of behaviour across episodes
+
+---
+
+## Observations
+- The agent successfully interacts with the environment and generates valid actions
+- Reward signals influence agent behaviour, though optimisation opportunities remain
+- Some behaviours indicate the need for further reward shaping and tuning
+
+---
+
+## Limitations
+- Evaluation is conducted in a simulated environment
+- Winning strategies are not always achieved consistently
+- Performance depends heavily on reward design and environment complexity
+
+---
+
+## Conclusion
+The evaluation process provides insight into how the RL agent behaves in practice and highlights areas for improvement in reward design and training strategy.
+
+These results inform future iterations of training and environment refinement.
