@@ -1,65 +1,131 @@
 # Reinforcement Learning Agent for a Custom Turn-Based Board Game
 
 ## Project Overview
-This project focuses on the design and implementation of a Reinforcement Learning (RL) agent capable of playing a custom turn-based board game. A custom game environment was built using OpenAI Gym, and a Proximal Policy Optimization (PPO) agent was trained using Stable-Baselines3.
 
-The primary objective was to explore how reinforcement learning agents interact with complex game environments, including environment design, state representation, reward shaping, and validation of game logic.
+This project presents the design, implementation, and evaluation of a Reinforcement Learning agent trained to play a custom turn-based board game.
 
----
+A custom OpenAI Gym environment was developed to simulate the game logic, and a Proximal Policy Optimization (PPO) agent was trained using Stable Baselines3.
 
-## My Role
-I was responsible for the **design and development of the Reinforcement Learning system**, including:
+The main objectives of this project were to design a fully functional custom environment, define appropriate state and action spaces, implement reward shaping strategies, train a stable PPO agent, and validate complex game logic through systematic testing.
 
-- Designing the custom OpenAI Gym environment
-- Defining state, action, and observation spaces
-- Implementing reward functions aligned with game rules
-- Training a PPO-based RL agent using Stable-Baselines3
-- Writing validation scripts to test environment logic and agent behaviour
-- Managing RL-related code and experiments in GitHub
 
----
+## System Architecture
 
-## Technologies Used
-- **Python**
-- **OpenAI Gym**
-- **Stable-Baselines3 (PPO)**
-- **NumPy**
-- **Git / GitHub**
+The project consists of three core components.
 
----
+### Custom Gym Environment
+
+A custom Gym environment called OriginsEnv was implemented. This environment defines the action space, observation space, reward logic, and termination conditions for the board game.
+
+### Environment Registration
+
+The environment is registered under the name Origins-v0 so that it can be instantiated using gym.make.
+
+### PPO Training Pipeline
+
+A PPO training pipeline was implemented using Stable Baselines3. The environment is wrapped using DummyVecEnv for compatibility with PPO, and training logs are recorded for analysis.
+
+
+## Training Configuration
+
+The PPO agent was trained with the following configuration:
+
+- Policy: MlpPolicy  
+- Learning rate: 0.0003  
+- Total timesteps: 100000  
+- n_steps: 2048  
+- Batch size: 64  
+- n_epochs: 10  
+- Gamma: 0.99  
+- GAE lambda: 0.95  
+- Clip range: 0.2  
+
+TensorBoard logging was enabled to monitor training performance.
+
+
+## Training Performance
+
+The agent successfully learned to generate valid actions and reduce penalties for invalid moves. Over time, accumulated reward improved as the agent adapted to the game environment.
+
+However, the agent did not consistently achieve winning conditions, highlighting challenges such as reward sparsity, exploration versus exploitation trade-offs, and environment complexity.
+
 
 ## Environment Design
-A custom Gym environment was implemented by subclassing `gym.Env`. The environment defines:
 
-- A discrete **action space** representing valid moves in the game
-- A structured **observation space** encoding the board state
-- Clear **terminal conditions** for episode completion
-- Penalties for invalid actions to ensure rule-compliant gameplay
+The custom environment subclasses gym.Env and defines:
 
-Special attention was given to handling edge cases and invalid moves, which are common challenges in turn-based game environments.
+- A discrete action space representing possible moves  
+- An observation space encoding the board state  
+- A reward function assigning positive rewards for valid actions and penalties for invalid moves  
+- Terminal conditions for episode completion  
 
----
+Special care was taken to handle edge cases and ensure rule-compliant gameplay.
 
-## Reinforcement Learning Agent
-The RL agent was trained using **Proximal Policy Optimization (PPO)** due to its stability and suitability for discrete action spaces.
-
-Key aspects include:
-- Custom reward shaping to encourage valid gameplay
-- Incremental rewards and penalties based on agent actions
-- Iterative experimentation with reward structure and environment parameters
-
-While the agent successfully learned to generate valid moves, it did not consistently achieve winning conditions, highlighting the challenges of reward sparsity and environment complexity.
-
----
 
 ## Validation and Testing
-Validation scripts were written to ensure:
-- Environment logic behaves as expected
-- State transitions are valid
-- Invalid actions are handled correctly
 
-Some edge-case tests revealed unresolved issues, providing valuable insight into the difficulty of implementing and validating complex game rules.
+Custom validation scripts were written to verify:
 
----
+- Correct state transitions  
+- Proper handling of invalid actions  
+- Accurate reward assignment  
+- Valid terminal conditions  
+
+Most tests passed successfully, though some edge cases revealed the complexity of implementing board game logic.
+
 
 ## Project Structure
+
+- main.py – PPO training script  
+- register_env.py – Environment registration  
+- origins_env.py – Custom Gym environment  
+- requirements.txt – Project dependencies  
+- experiments – Experimental logs and files  
+- README.md – Project documentation  
+
+
+## How to Run the Project
+
+1. Install dependencies  
+   pip install -r requirements.txt  
+
+2. Register the environment  
+   python register_env.py  
+
+3. Train the PPO agent  
+   python main.py  
+
+4. View training logs  
+   tensorboard --logdir=ppo_origins_tensorboard  
+
+
+## Key Challenges and Lessons Learned
+
+- Reward sparsity slowed convergence  
+- Invalid action penalties influenced exploration behaviour  
+- Environment complexity required iterative refinement  
+- Hyperparameter tuning affected stability  
+
+
+## Future Improvements
+
+- Introduce self-play training  
+- Implement baseline comparison such as a random agent  
+- Improve reward shaping  
+- Track win-rate statistics  
+- Extend to multi-agent training  
+
+
+## Technologies Used
+
+Python  
+OpenAI Gym  
+Stable Baselines3  
+NumPy  
+TensorBoard  
+Git and GitHub  
+
+
+## Summary
+
+This project demonstrates the complete development cycle of a reinforcement learning system, from custom environment design and reward engineering to PPO training and validation. It highlights both the technical and experimental challenges of applying reinforcement learning to a complex custom game environment.
